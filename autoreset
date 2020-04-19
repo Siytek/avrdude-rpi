@@ -9,10 +9,10 @@ fl = fcntl.fcntl(fd, fcntl.F_GETFL)
 fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK)
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 dtr = re.compile('.+TIOCM_DTR.+')
 start = time.time()
-pin = 7
+pin = 18
 
 def reset():
   GPIO.setup(pin, GPIO.OUT)
@@ -22,7 +22,7 @@ def reset():
 
 def process():
   while True:
-    try: 
+    try:
       duration = time.time() - start
       input = sys.stdin.readline().strip()
       if input is None: # == "":
